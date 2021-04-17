@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+	if (!isset($_GET['name'])) {
+		header("Location: ramadan-charity");
+	}
+?>
 <html lang="en">
 <head>
 	<title>Merci <?php echo $_GET['name']?></title>
@@ -29,7 +34,13 @@
 	<div class="container-contact100">
 		<div class="wrap-contact100">
         <h1>Merci pour votre demande <?php echo $_GET['name']?>!</h1>
-        <p>Nous vous recontacterons pour la suite. <br/>Veuillez vous munir de votre bon de commande et d'un justificatif (avis d'imposition).</p>
+		<br/>
+        <div>Nous vous recontacterons pour la suite.<br/><br/>Veuillez vous munir :
+		 <ul>
+		 <li> - de votre bon de commande</li>
+		 <li> - d'un justificatif attestant votre situation (carte d'étudiant ou avis d'imposition)</li>
+		 </ul>
+		 </div>
         </div>
 	</div>
 <div id="dropDownSelect1"></div>
