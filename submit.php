@@ -13,7 +13,7 @@ use PHPMailer\PHPMailer\Exception;
 require_once __DIR__ . '/vendor/autoload.php';
 require 'vendor/autoload.php';
 
-require_once 'env.php';
+require_once 'env/env.php';
 
 /**
  * 
