@@ -1,4 +1,10 @@
 <?php
+function logError($message) {
+    $log_file2 = "./errors.log";
+    ini_set("log_errors", TRUE);
+    ini_set('error_log', $log_file2);
+    error_log($message);
+}
 
 /**
  * 
@@ -14,7 +20,7 @@ use PHPMailer\PHPMailer\Exception;
 require_once __DIR__ . '/vendor/autoload.php';
 require 'vendor/autoload.php';
 
-require_once 'env/env.php';
+require_once './env/env.php';
 
 /**
  * 
@@ -28,6 +34,8 @@ $contact = htmlspecialchars($_POST['contact']);
 $message = htmlspecialchars($_POST['message']);
 
 if ($name && $contact && $message) {
+
+    try {
     // Create pdf
     $mpdf = new \Mpdf\Mpdf();
 
@@ -56,7 +64,6 @@ if ($name && $contact && $message) {
     //Instantiation and passing `true` enables exceptions
     $mail = new PHPMailer(true);
 
-    try {
         //Server settings
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
@@ -70,8 +77,11 @@ if ($name && $contact && $message) {
         //Recipients
         $mail->setFrom($USER);
         $mail->addAddress($TO);     //Add a recipient
-        // $mail->addReplyTo('info@example.com', 'Information');
-        // $mail->addCC('cc@example.com');
+        //$mail->addReplyTo('info@example.com', 'Information');
+ 
+        // if ($preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $contact)) {
+        //     $mail->addCC($contact.trim());
+        // }
         // $mail->addBCC('bcc@example.com');
 
         //Attachments
@@ -90,7 +100,7 @@ if ($name && $contact && $message) {
         $mail->send();
         unlink('recu.pdf');
     } catch (Exception $e) {
-        echo "{$mail->ErrorInfo}";
+        logError($e);
     }
 }
 ?>

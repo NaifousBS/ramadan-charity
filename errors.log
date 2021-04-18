@@ -1,0 +1,21 @@
+[18-Apr-2021 11:57:21 Europe/Berlin] PHPMailer\PHPMailer\Exception: Invalid address:  (From): yup in C:\xampp\htdocs\ramadan-charity\vendor\phpmailer\phpmailer\src\PHPMailer.php:1282
+Stack trace:
+#0 C:\xampp\htdocs\ramadan-charity\submit.php(72): PHPMailer\PHPMailer\PHPMailer->setFrom('yup')
+#1 {main}
+[18-Apr-2021 11:57:21 Europe/Berlin] PHP Warning:  Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\ramadan-charity\vendor\mpdf\mpdf\src\Mpdf.php:9566) in C:\xampp\htdocs\ramadan-charity\submit.php on line 104
+[18-Apr-2021 12:13:12 Europe/Berlin] PHPMailer\PHPMailer\Exception: File Error: Could not open file: recu.pdf in C:\xampp\htdocs\ramadan-charity\vendor\phpmailer\phpmailer\src\PHPMailer.php:3230
+Stack trace:
+#0 C:\xampp\htdocs\ramadan-charity\vendor\phpmailer\phpmailer\src\PHPMailer.php(3203): PHPMailer\PHPMailer\PHPMailer->encodeFile('recu.pdf', 'base64')
+#1 C:\xampp\htdocs\ramadan-charity\vendor\phpmailer\phpmailer\src\PHPMailer.php(2834): PHPMailer\PHPMailer\PHPMailer->attachAll('attachment', 'b1_3eT26XymjIqG...')
+#2 C:\xampp\htdocs\ramadan-charity\vendor\phpmailer\phpmailer\src\PHPMailer.php(1568): PHPMailer\PHPMailer\PHPMailer->createBody()
+#3 C:\xampp\htdocs\ramadan-charity\vendor\phpmailer\phpmailer\src\PHPMailer.php(1464): PHPMailer\PHPMailer\PHPMailer->preSend()
+#4 C:\xampp\htdocs\ramadan-charity\submit.php(104): PHPMailer\PHPMailer\PHPMailer->send()
+#5 {main}
+[18-Apr-2021 12:14:43 Europe/Berlin] PHPMailer\PHPMailer\Exception: File Error: Could not open file: recu.pdf in C:\xampp\htdocs\ramadan-charity\vendor\phpmailer\phpmailer\src\PHPMailer.php:3230
+Stack trace:
+#0 C:\xampp\htdocs\ramadan-charity\vendor\phpmailer\phpmailer\src\PHPMailer.php(3203): PHPMailer\PHPMailer\PHPMailer->encodeFile('recu.pdf', 'base64')
+#1 C:\xampp\htdocs\ramadan-charity\vendor\phpmailer\phpmailer\src\PHPMailer.php(2834): PHPMailer\PHPMailer\PHPMailer->attachAll('attachment', 'b1_c6tde56QolXt...')
+#2 C:\xampp\htdocs\ramadan-charity\vendor\phpmailer\phpmailer\src\PHPMailer.php(1568): PHPMailer\PHPMailer\PHPMailer->createBody()
+#3 C:\xampp\htdocs\ramadan-charity\vendor\phpmailer\phpmailer\src\PHPMailer.php(1464): PHPMailer\PHPMailer\PHPMailer->preSend()
+#4 C:\xampp\htdocs\ramadan-charity\submit.php(104): PHPMailer\PHPMailer\PHPMailer->send()
+#5 {main}
