@@ -41,6 +41,6 @@
         $mail->Body    = $data;
         $mail->AltBody = strip_tags($data);
 
-        //$mail->send();
+        $mail->send();
         unlink('recu.pdf');
 ?>
