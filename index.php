@@ -30,7 +30,7 @@
 	<body>
 		<div class="container-contact100">
 			<div class="wrap-contact100">
-				<form method="post" action="submit.php" id="demand-form" class="contact100-form validate-form">
+				<form method="post" action="php/submit.php" id="demand-form" class="contact100-form validate-form">
 					<img class="center" src="images/avicenne_logo.png" alt="association avicenne rouffach logo" width="300" height="200">
 					<span class="contact100-form-title">
 						Association Avicenne Rouffach<br>Demande de colis alimentaire
@@ -91,72 +91,6 @@
 			</div>
 		</div>
 		<div id="dropDownSelect1"></div>
-		<script type="text/javascript">
-			const studentPackage = [{
-					name: 'Paquet de riz 300g',
-					amount: 2
-				},
-				{
-					name: 'Oeuf',
-					amount: 6,
-				},
-				{
-					name: 'Sucre en poudre 200g',
-					amount: 2
-				},
-			];
-			const familyPackage = [{
-					name: 'Bouteille d\'eau',
-					amount: 6
-				},
-				{
-					name: 'Paquet de pâtes 400g',
-					amount: 6,
-				},
-				{
-					name: 'Pomme',
-					amount: 6
-				},
-			];
-			const otherPackage = [{
-					name: 'Paquet de riz 300g',
-					amount: 2
-				},
-				{
-					name: 'Oeuf',
-					amount: 6,
-				},
-				{
-					name: 'Sucre en poudre 200g',
-					amount: 2
-				},
-			];
-
-			function displayPackageContents(package) {
-				// Récupération d'une référence à la table
-				const tableId = 'table-container';
-				const submitButtonId = 'submit-btn';
-				const refTable = document.getElementById(tableId);
-				const refSubmitButton = document.getElementById(submitButtonId);
-
-				// Affiche le tableau
-				refTable.style.display = '';
-
-
-				for (const object of package) {
-					const rowNumber = refTable.rows.length - 1;
-					const newLine = refTable.insertRow(rowNumber + 1);
-					newLine.setAttribute('id', 'table-row-item-' + rowNumber);
-
-
-					// Type de produit
-					newLine.insertCell(0).appendChild(document.createTextNode(object.name));
-					// Quantité
-					newLine.insertCell(1).appendChild(document.createTextNode(object.amount));
-				}
-			}
-		</script>
-
 		<!--===============================================================================================-->
 		<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 		<!--===============================================================================================-->
@@ -166,35 +100,6 @@
 		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 		<!--===============================================================================================-->
 		<script src="vendor/select2/select2.min.js"></script>
-		<script>
-			$(".selection-2").select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $('#dropDownSelect1')
-			});
-
-			$(function() {
-				$("#table-container").css("display", "none");
-				$("#name").tooltip();
-				$("#submit-btn").tooltip();
-			});
-
-
-			$('#packageType').change(function() {
-				$("#table-container tr").remove();
-				if ($(this).val() != '--') {
-					$('#table-container thead').after('<tr><th scope="col">Produit</th><th scope="col">Quantité</th></tr>');
-					if ($(this).val() === '1') {
-						displayPackageContents(studentPackage);
-					}
-					if ($(this).val() === '2') {
-						displayPackageContents(familyPackage);
-					}
-					if ($(this).val() === '3') {
-						displayPackageContents(otherPackage);
-					}
-				}
-			});
-		</script>
 		<!--===============================================================================================-->
 		<script src="vendor/daterangepicker/moment.min.js"></script>
 		<script src="vendor/daterangepicker/daterangepicker.js"></script>
@@ -202,6 +107,7 @@
 		<script src="vendor/countdowntime/countdowntime.js"></script>
 		<!--===============================================================================================-->
 		<script src="js/main.js"></script>
+		<script src="js/custom.js"></script>
 
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>

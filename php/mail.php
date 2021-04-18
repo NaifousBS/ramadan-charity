@@ -1,61 +1,5 @@
 <?php
-function logError($message) {
-    $log_file2 = "./errors.log";
-    ini_set("log_errors", TRUE);
-    ini_set('error_log', $log_file2);
-    error_log($message);
-}
-
 /**
- * 
- * Imports
- * 
- */
-// phpmailer
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-// mpdf
-require_once __DIR__ . '/vendor/autoload.php';
-require 'vendor/autoload.php';
-
-require_once './env/env.php';
-
-/**
- * 
- * PHP PDF GENERATOR - MPDF
- * 
- */
-
-// Get form variables
-$name = htmlspecialchars($_POST['name']);
-$contact = htmlspecialchars($_POST['contact']);
-$message = htmlspecialchars($_POST['message']);
-
-if ($name && $contact && $message) {
-
-    try {
-    // Create pdf
-    $mpdf = new \Mpdf\Mpdf();
-
-    $data = '';
-
-    $data .= '<h1>Reçu - bon de commande de colis alimentaire</h1>';
-
-    $data .= '<strong>Nom:</strong> ' . $name . '<br/>';
-    $data .= '<strong>Contact:</strong> ' . $contact . '<br/>';
-    $data .= '<strong>Type de colis:</strong> 1 - Etudiant' . '<br/>';
-
-    if ($message) {
-        $data .= '<strong>Message:</strong> ' . $message . '<br/>';
-    }
-
-    $mpdf->WriteHTML($data);
-    $mpdf->Output('recu.pdf', 'F');
-    $mpdf->Output('recu-demande-colis-alimentaire-association-avicenne.pdf', 'D');
-
-    /**
      * 
      * PHP MAILER
      * 
@@ -97,10 +41,6 @@ if ($name && $contact && $message) {
         $mail->Body    = $data;
         $mail->AltBody = strip_tags($data);
 
-        $mail->send();
+        //$mail->send();
         unlink('recu.pdf');
-    } catch (Exception $e) {
-        logError($e);
-    }
-}
 ?>
