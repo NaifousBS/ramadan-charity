@@ -37,10 +37,9 @@
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Nouvelle demande de colis alimentaire - ' . $_POST['name'];
+        $mail->Subject = 'Nouvelle demande de colis alimentaire - ' . $name;
         $mail->Body    = $data;
         $mail->AltBody = strip_tags($data);
 
-        $mail->send();
-        unlink('recu.pdf');
+        //$mail->send();
 ?>

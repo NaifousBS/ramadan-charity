@@ -1,44 +1,4 @@
 <?php
-
-function addCsvContent($packageType) {
-
-    $result = '';
-
-    if ($packageType) {
-
-        $filepath = '../resources/';
-
-        switch ($packageType) {
-            case '1':
-                $filepath .= 'studentPackage.csv';
-                break;
-            case '2':
-                $filepath .= 'familyPackage.csv';
-                break;
-            case '3':
-                $filepath .= 'otherPackage.csv';
-                break;
-            default;
-                $filepath = '';                
-                
-        }
-
-        if (($handle = fopen($filepath, "r")) !== FALSE) {
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $num = count($data);
-                $result .= '<tr>';
-                for ($c=0; $c < $num; $c++) {
-                    $result .='<td>'.$data[$c].'</td>';
-                }
-                $result .= '</tr>';
-            }
-            fclose($handle);
-        }
-    }
-
-    return $result;
-}
-
 /**
  * 
  * PHP PDF GENERATOR - MPDF
@@ -62,6 +22,7 @@ if ($packageType == '3') {
 $data = '
 <h1>Reçu - bon de commande de colis alimentaire</h1>
 <strong>Nom:</strong> ' . $name . '<br/>
+<strong>Date:</strong> ' . date('j/m/y') . '<br/>
 <strong>Contact:</strong> ' . $contact . '<br/>
 <strong>Type de colis:</strong> '.$packageType.' - '.$packageName.'
 <br/><br/>
@@ -80,6 +41,20 @@ if ($message) {
 $data .= '<br/><br/><i>L\'Association Avicenne de Rouffach</i>';
 
 $mpdf->WriteHTML($data);
-$mpdf->Output('recu.pdf', 'F');
-$mpdf->Output('recu-demande-colis-alimentaire-association-avicenne.pdf', 'D');
+
+
+// Output 
+// F 'file'
+// D 'download' 
+$date = date('Y-m-j');
+$formattedName = $name;
+$folder = '../resources/pdf/'.$date;
+if (!is_dir($folder)) {
+    // Create our directory if it does not exist
+    mkdir($folder);
+}
+
+$filename = $date.'-'.formatName($name).'-recu-demande-colis-alimentaire.pdf';
+$mpdf->Output($folder.'/'.$filename, 'F');
+$mpdf->Output($filename, 'D');
 ?>
