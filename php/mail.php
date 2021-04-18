@@ -31,7 +31,7 @@
         //Attachments
         // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
         // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-        $mail->addAttachment('recu.pdf');
+        $mail->addAttachment($filename);
 
         $mail->CharSet = 'UTF-8';
 
@@ -41,5 +41,5 @@
         $mail->Body    = $data;
         $mail->AltBody = strip_tags($data);
 
-        //$mail->send();
+        $mail->send();
 ?>
