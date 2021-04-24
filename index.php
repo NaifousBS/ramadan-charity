@@ -33,7 +33,7 @@
 				<form method="post" action="php/submit.php" id="demand-form" class="contact100-form validate-form">
 					<img class="center" src="images/avicenne_logo.png" alt="association avicenne rouffach logo" width="300" height="200">
 					<span class="contact100-form-title">
-						Association Avicenne Rouffach<br>Demande de colis alimentaire
+						Association Avicenne Rouffach<br>Inscription colis alimentaire
 					</span>
 
 					<?php
@@ -42,9 +42,18 @@
 					}
 					?>
 
-					<div class="wrap-input100 validate-input" data-validate="Ce champ est obligatoire">
-						<span class="label-input100">Nom ou appellation anonyme</span>
-						<input id="name" class="input100" type="text" name="name" placeholder="Nom" title="Si vous souhaitez rester anonyme, écrivez par exemple 'Famille <?php echo rand(1, 1000); ?>'">
+					<p>
+						Simple et rapide. Remplissez les champs pour vous inscrire.<br/>
+						Après inscription vous recevrez un e-mail pour valider votre inscription, veuillez donc bien indiquer votre e-mail.<br/>
+						Important : les inscriptions doivent être envoyées au plus tard le <strong>vendredi à 15h.</strong><br/>
+						Les distributions ont lieu le <strong>dimanche</strong> : vous recevrez l'adresse exacte par e-mail.
+					</p>
+					<br/>
+					<br/>
+
+					<div class="wrap-input100 validate-input">
+						<span class="label-input100">Nom</span>
+						<input id="name" class="input100" type="text" name="name" placeholder="Nom"/>
 						<span class="focus-input100"></span>
 					</div>
 					<?php
@@ -53,9 +62,9 @@
 					}
 					?>
 
-					<div class="wrap-input100 validate-input" data-validate="Ce champ est obligatoire">
-						<span class="label-input100">Contact</span>
-						<input class="input100" type="text" name="contact" placeholder="Mail ou Téléphone">
+					<div class="wrap-input100 validate-input">
+						<span class="label-input100">Email</span>
+						<input class="input100" type="email" name="mail" placeholder="adresse@exemple.com">
 						<span class="focus-input100"></span>
 					</div>
 					<?php
@@ -64,14 +73,25 @@
 					}
 					?>
 
+					<div class="wrap-input100 validate-input">
+						<span class="label-input100">Téléphone</span>
+						<input class="input100" type="tel" name="tel" placeholder="0102030405">
+						<span class="focus-input100"></span>
+					</div>
+					<?php
+					if (isset($_GET['4'])) {
+						echo '<div class="alert alert-danger"><strong>' . $_GET['4'] . '</strong></div>';
+					}
+					?>
+
 					<div class="wrap-input100 input100-select">
 						<span class="label-input100">Choix du type de colis</span>
 						<div>
 							<select id="packageType" class="selection-2" name="packageType">
 								<option>--</option>
-								<option value="1">Type 1 - Etudiant</option>
-								<option value="2">Type 2 - Famille</option>
-								<option value="3">Type 3 - Autre</option>
+								<option value="1">Etudiant</option>
+								<option value="2">Famille</option>
+								<!-- <option value="3">Autre</option> -->
 							</select>
 						</div>
 						<span class="focus-input100"></span>
