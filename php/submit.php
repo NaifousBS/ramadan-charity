@@ -1,20 +1,14 @@
 <?php
-
+session_start();
 /**
  * 
  * Imports
  * 
  */
 // phpmailer
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
 
-// mpdf
-require_once '../vendor/autoload.php';
 require '../vendor/autoload.php';
 
-require_once '../env/env.php';
 require_once 'functions.php';
 
 // Get form variables
@@ -29,11 +23,17 @@ if ($name && $contact && $packageType && $packageType != '--') {
         include_once 'mail.php';
     } catch (Exception $e) {
         logError($e);
+        exit;
     }
+    
+    header('Location: ../thanks.php?name='.$name);
+    $mpdf->Output($filename, 'D');
+    exit;
 } else {
 
     $prefix = '?';
     $and = '&';
+    $_SESSION['dl-link'] = '';
 
     if (!$name) {
         $error_message = 'Le nom est obligatoire';
@@ -50,4 +50,5 @@ if ($name && $contact && $packageType && $packageType != '--') {
         $prefix .= '3=' . $error_message . $and;
     }
     header('Location: ../' . $prefix);
+    exit;
 }

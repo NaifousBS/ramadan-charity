@@ -55,6 +55,7 @@ if (!is_dir($folder)) {
 }
 
 $filename = $date.'-'.formatName($name).'-recu-demande-colis-alimentaire.pdf';
-$mpdf->Output($folder.'/'.$filename, 'F');
-$mpdf->Output($filename, 'D');
-?>
+$downloadLink = $folder.'/'.$filename;
+$mpdf->Output($downloadLink, 'F');
+$_SESSION['dl-link'] = str_replace('../', '', $downloadLink);
+//$mpdf->Output($filename, 'D');
