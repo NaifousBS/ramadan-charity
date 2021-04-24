@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 
  * Imports
@@ -29,5 +30,24 @@ if ($name && $contact && $packageType && $packageType != '--') {
     } catch (Exception $e) {
         logError($e);
     }
+} else {
+
+    $prefix = '?';
+    $and = '&';
+
+    if (!$name) {
+        $error_message = 'Le nom est obligatoire';
+        $prefix .= '1=' . $error_message . $and;
+    }
+
+    if (!$contact) {
+        $error_message = 'Le contact par mail ou téléphone est obligatoire';
+        $prefix .= '2=' . $error_message . $and;
+    }
+
+    if (!$packageType || $packageType == '--') {
+        $error_message = 'Choisissez un élément de la liste';
+        $prefix .= '3=' . $error_message . $and;
+    }
+    header('Location: ../' . $prefix);
 }
-?>

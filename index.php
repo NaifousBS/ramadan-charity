@@ -36,17 +36,33 @@
 						Association Avicenne Rouffach<br>Demande de colis alimentaire
 					</span>
 
+					<?php
+					if (isset($_GET['1']) || isset($_GET['2']) || isset($_GET['3'])) {
+						echo '<div class="alert alert-danger"><strong>Vous devez renseigner certains champs</strong></div>';
+					}
+					?>
+
 					<div class="wrap-input100 validate-input" data-validate="Ce champ est obligatoire">
 						<span class="label-input100">Nom ou appellation anonyme</span>
 						<input id="name" class="input100" type="text" name="name" placeholder="Nom" title="Si vous souhaitez rester anonyme, écrivez par exemple 'Famille <?php echo rand(1, 1000); ?>'">
 						<span class="focus-input100"></span>
 					</div>
+					<?php
+					if (isset($_GET['1'])) {
+						echo '<div class="alert alert-danger"><strong>' . $_GET['1'] . '</strong></div>';
+					}
+					?>
 
 					<div class="wrap-input100 validate-input" data-validate="Ce champ est obligatoire">
 						<span class="label-input100">Contact</span>
 						<input class="input100" type="text" name="contact" placeholder="Mail ou Téléphone">
 						<span class="focus-input100"></span>
 					</div>
+					<?php
+					if (isset($_GET['2'])) {
+						echo '<div class="alert alert-danger"><strong>' . $_GET['2'] . '</strong></div>';
+					}
+					?>
 
 					<div class="wrap-input100 input100-select">
 						<span class="label-input100">Choix du type de colis</span>
@@ -60,6 +76,11 @@
 						</div>
 						<span class="focus-input100"></span>
 					</div>
+					<?php
+					if (isset($_GET['3'])) {
+						echo '<div class="alert alert-danger"><strong>' . $_GET['3'] . '</strong></div>';
+					}
+					?>
 
 					<div>
 						<table id="table-container" class="table">
@@ -109,7 +130,7 @@
 		<script src="js/main.js"></script>
 		<script src="js/custom.js"></script>
 
-		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<!-- Global site tag (gtag.js) - Google Analytics
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
@@ -120,7 +141,7 @@
 			gtag('js', new Date());
 
 			gtag('config', 'UA-23581568-13');
-		</script>
+		</script> -->
 	</body>
 
 	</html>
