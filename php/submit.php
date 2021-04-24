@@ -13,12 +13,14 @@ require_once 'functions.php';
 
 // Get form variables
 $name = htmlspecialchars($_POST['name']);
-$contact = htmlspecialchars($_POST['contact']);
+$mail = htmlspecialchars($_POST['mail']);
+$tel = htmlspecialchars($_POST['tel']);
 $message = htmlspecialchars($_POST['message']);
 $packageType = htmlspecialchars($_POST['packageType']);
 
-if ($name && $contact && $packageType && $packageType != '--') {
+if ($name && ($mail || $tel) && $packageType && $packageType != '--') {
     try {
+        addEntryInCsv($name, $packageType, $mail, $tel);
         include_once 'mpdf.php';
         include_once 'mail.php';
     } catch (Exception $e) {
@@ -40,15 +42,18 @@ if ($name && $contact && $packageType && $packageType != '--') {
         $prefix .= '1=' . $error_message . $and;
     }
 
-    if (!$contact) {
-        $error_message = 'Le contact par mail ou téléphone est obligatoire';
-        $prefix .= '2=' . $error_message . $and;
+    if (!$mail && !$tel) {
+        $text = $tel ? 'Le numéro de téléphone' : 'L\'adresse email'; 
+        $error_message = $text.' est obligatoire';
+        $errorId = $tel ? '4' : '2';
+        $prefix .= $errorId.'=' . $error_message . $and;
     }
 
     if (!$packageType || $packageType == '--') {
         $error_message = 'Choisissez un élément de la liste';
         $prefix .= '3=' . $error_message . $and;
     }
+
     header('Location: ../' . $prefix);
     exit;
 }

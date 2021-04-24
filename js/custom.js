@@ -98,6 +98,14 @@ $(function () {
 });
 
 $('#packageType').change(function () {
+	if ($(this).val() != '--') {
+		if ($(this).val() === '2') {
+			//$('#packageType').after();
+		}
+	}
+});
+
+/* $('#packageType').change(function () {
 	$('#table-container tr').remove();
 	if ($(this).val() != '--') {
 		$('#table-container thead').after(
@@ -113,7 +121,7 @@ $('#packageType').change(function () {
 			displayPackageContents(otherPackage);
 		}
 	}
-});
+}); */
 
 // $(document).ready(function () {
 // 	$('#name').change(function () {

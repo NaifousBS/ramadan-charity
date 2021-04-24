@@ -52,4 +52,11 @@ function formatName($name) {
     $formattedName = strtolower($formattedName);
     return $formattedName;
 }
+
+function addEntryInCsv($name, $packageType, $mail, $tel) {
+    $cmdFile = '../resources/commandes.csv';
+    $separator = ',';
+    $txt = date('c').$separator.$name.$separator.$packageType.$separator.$mail.$separator.$tel; 
+    $myfile = file_put_contents($cmdFile, $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+}
 ?>

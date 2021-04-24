@@ -23,7 +23,8 @@ $data = '
 <h1>Reçu - bon de commande de colis alimentaire</h1>
 <strong>Nom:</strong> ' . $name . '<br/>
 <strong>Date:</strong> ' . date('j/m/y') . '<br/>
-<strong>Contact:</strong> ' . $contact . '<br/>
+<strong>Mail:</strong> ' . $mail . '<br/>
+<strong>Tél:</strong> ' . $tel . '<br/>
 <strong>Type de colis:</strong> '.$packageType.' - '.$packageName.'
 <br/><br/>
 <table border="1">
