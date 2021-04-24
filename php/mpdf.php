@@ -26,13 +26,6 @@ $data = '
 <strong>Mail:</strong> ' . $mail . '<br/>
 <strong>Tél:</strong> ' . $tel . '<br/>
 <strong>Type de colis:</strong> '.$packageType.' - '.$packageName.'
-<br/><br/>
-<table border="1">
-<tbody>
-<tr style="background-color: #d9d9d9"><td><strong>Produit</strong></td><td><strong>Quantité</strong></td></tr>
-'.addCsvContent($packageType).'
-</tbody>
-</table>
 ';
 
 if ($message) {
