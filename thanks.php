@@ -38,11 +38,12 @@ $link=$_SESSION['dl-link'];
 		<div class="wrap-contact100">
         <h1>Merci pour votre demande <?php echo $_GET['name']?>!</h1>
 		<br/>
-        <div>Nous vous recontacterons pour la suite.<br/><br/>Veuillez vous munir :
+        <div>Nous vous recontacterons pour la suite.<br/><br/>
+		<!-- Veuillez vous munir :
 		 <ul>
 		 <li> - de votre bon de commande</li>
 		 <li> - d'un justificatif attestant votre situation (carte d'étudiant ou avis d'imposition)</li>
-		 </ul>
+		 </ul> -->
 		 </div>
 		 <?php 
 		 if (isset($_SESSION['dl-link'])) {
