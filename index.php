@@ -1,6 +1,7 @@
 	<!DOCTYPE html>
 	<?php
 	session_start();
+	$_SESSION['dl-link'] = null;
 	?>
 	<html lang="en">
 
