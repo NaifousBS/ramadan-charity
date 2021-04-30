@@ -1,12 +1,14 @@
 <?php
-function logError($message) {
+function logError($message)
+{
     $log_file2 = "../log/errors.log";
     ini_set("log_errors", TRUE);
     ini_set('error_log', $log_file2);
     error_log($message);
 }
 
-function addCsvContent($packageType) {
+function addCsvContent($packageType)
+{
 
     $result = '';
 
@@ -25,16 +27,15 @@ function addCsvContent($packageType) {
                 $filepath .= 'otherPackage.csv';
                 break;
             default;
-                $filepath = '';                
-                
+                $filepath = '';
         }
 
         if (($handle = fopen($filepath, "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 $num = count($data);
                 $result .= '<tr>';
-                for ($c=0; $c < $num; $c++) {
-                    $result .='<td>'.$data[$c].'</td>';
+                for ($c = 0; $c < $num; $c++) {
+                    $result .= '<td>' . $data[$c] . '</td>';
                 }
                 $result .= '</tr>';
             }
@@ -45,7 +46,8 @@ function addCsvContent($packageType) {
     return $result;
 }
 
-function formatName($name) {
+function formatName($name)
+{
     $formattedName = str_replace(' ', '-', $name);
     $formattedName = preg_replace('/[^A-Za-z0-9\-]/', '', $formattedName);
     $formattedName = preg_replace('/-+/', '-', $formattedName);
@@ -53,10 +55,15 @@ function formatName($name) {
     return $formattedName;
 }
 
-function addEntryInCsv($name, $packageType, $mail, $tel) {
+function addEntryInCsv($arr)
+{
     $cmdFile = '../resources/commandes.csv';
     $separator = ',';
-    $txt = date('c').$separator.$name.$separator.$packageType.$separator.$mail.$separator.$tel; 
-    $myfile = file_put_contents($cmdFile, $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+    $txt = date('c');
+
+    foreach ($arr as $value) {
+        $txt .= $separator . $value;
+    }
+
+    $myfile = file_put_contents($cmdFile, $txt . PHP_EOL, FILE_APPEND | LOCK_EX);
 }
-?>

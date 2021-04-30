@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -20,7 +21,7 @@ $mail->Host       = SMTPSERVER;                     //Set the SMTP server to sen
 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
 $mail->Username   = MAILUSER;                     //SMTP username
 $mail->Password   = MAILPASS;                               //SMTP password
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;//PHPMailer::ENCRYPTION_STARTTLS;     //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //PHPMailer::ENCRYPTION_STARTTLS;     //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 $mail->Port       = 465; //587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
 //Recipients
@@ -36,7 +37,7 @@ $mail->addAddress(MAILTO);     //Add a recipient
 //Attachments
 // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
 // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-$mail->addAttachment($folder.'/'.$filename);
+$mail->addAttachment($folder . '/' . $filename);
 
 $mail->CharSet = 'UTF-8';
 

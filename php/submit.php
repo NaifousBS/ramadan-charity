@@ -12,23 +12,34 @@ require '../vendor/autoload.php';
 require_once 'functions.php';
 
 // Get form variables
-$name = htmlspecialchars($_POST['name']);
-$mail = htmlspecialchars($_POST['mail']);
-$tel = htmlspecialchars($_POST['tel']);
-$message = htmlspecialchars($_POST['message']);
-$packageType = htmlspecialchars($_POST['packageType']);
+$_SESSION['name'] = $name = htmlspecialchars($_POST['name']);
+$_SESSION['mail'] = $mail = htmlspecialchars($_POST['mail']);
+$_SESSION['tel'] = $tel = htmlspecialchars($_POST['tel']);
+$_SESSION['message'] = $message = htmlspecialchars($_POST['message']);
+$_SESSION['packageType'] = $packageType = htmlspecialchars($_POST['packageType']);
+$_SESSION['city'] = $city = htmlspecialchars($_POST['city']);
+$checkConsentement = isset(($_POST['checkConsentement'])) ? htmlspecialchars($_POST['checkConsentement']) : "";
 
-if ($name && ($mail || $tel) && $packageType && $packageType != '--') {
+$formValid = $name &&
+    ($mail || $tel) &&
+    $packageType &&
+    $packageType != '--' &&
+    $city &&
+    $checkConsentement;
+
+if ($formValid) {
     try {
-        addEntryInCsv($name, $packageType, $mail, $tel);
+        $message = str_replace(",", " ", $message);
+        $arr = array($name, $packageType, $mail, $tel, $city, $message);
+        addEntryInCsv($arr);
         include_once 'mpdf.php';
         include_once 'mail.php';
     } catch (Exception $e) {
         logError($e);
         exit;
     }
-    
-    header('Location: ../thanks.php?name='.$name);
+
+    header('Location: ../thanks.php?name=' . $name);
     $mpdf->Output($filename, 'D');
     exit;
 } else {
@@ -43,15 +54,25 @@ if ($name && ($mail || $tel) && $packageType && $packageType != '--') {
     }
 
     if (!$mail && !$tel) {
-        $text = $tel ? 'Le numéro de téléphone' : 'L\'adresse email'; 
-        $error_message = $text.' est obligatoire';
+        $text = $tel ? 'Le numéro de téléphone' : 'L\'adresse email';
+        $error_message = $text . ' est obligatoire';
         $errorId = $tel ? '4' : '2';
-        $prefix .= $errorId.'=' . $error_message . $and;
+        $prefix .= $errorId . '=' . $error_message . $and;
     }
 
     if (!$packageType || $packageType == '--') {
-        $error_message = 'Choisissez un élément de la liste';
+        $error_message = 'Choisissez le type de colis dans la liste';
         $prefix .= '3=' . $error_message . $and;
+    }
+
+    if (!$city) {
+        $error_message = 'Veuillez entrer une ville de retrait';
+        $prefix .= '5=' . $error_message . $and;
+    }
+
+    if (!$checkConsentement) {
+        $error_message = 'Vous devez accepter les conditions d\'utilisation';
+        $prefix .= '6=' . $error_message . $and;
     }
 
     header('Location: ../' . $prefix);

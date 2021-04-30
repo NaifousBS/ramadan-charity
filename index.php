@@ -1,4 +1,7 @@
 	<!DOCTYPE html>
+	<?php
+	session_start();
+	?>
 	<html lang="en">
 
 	<head>
@@ -37,23 +40,25 @@
 					</span>
 
 					<?php
-					if (isset($_GET['1']) || isset($_GET['2']) || isset($_GET['3'])) {
+					if (isset($_GET['1']) || isset($_GET['2']) || isset($_GET['3']) || isset($_GET['4']) || isset($_GET['5']) || isset($_GET['6'])) {
 						echo '<div class="alert alert-danger"><strong>Vous devez renseigner certains champs</strong></div>';
 					}
 					?>
 
 					<p>
-						Simple et rapide. Remplissez les champs pour vous inscrire.<br/>
-						Après inscription vous recevrez un e-mail pour valider votre inscription, veuillez donc bien indiquer votre e-mail.<br/>
-						Important : les inscriptions doivent être envoyées au plus tard le <strong>vendredi à 15h.</strong><br/>
+						Simple et rapide. Remplissez les champs pour vous inscrire.<br />
+						Après inscription vous recevrez un e-mail pour valider votre inscription, veuillez donc bien indiquer votre e-mail.<br />
+						Important : les inscriptions doivent être envoyées au plus tard le <strong>vendredi à 15h.</strong><br />
 						Les distributions ont lieu le <strong>dimanche</strong> : vous recevrez l'adresse exacte par e-mail.
 					</p>
-					<br/>
-					<br/>
+					<br />
+					<br />
 
 					<div class="wrap-input100 validate-input">
 						<span class="label-input100">Nom</span>
-						<input id="name" class="input100" type="text" name="name" placeholder="Nom"/>
+						<input id="name" class="input100" type="text" name="name" placeholder="Nom" value="<?php if (isset($_SESSION['name'])) {
+																												echo htmlentities($_SESSION['name']);
+																											} ?>" />
 						<span class="focus-input100"></span>
 					</div>
 					<?php
@@ -64,7 +69,9 @@
 
 					<div class="wrap-input100 validate-input">
 						<span class="label-input100">Email</span>
-						<input class="input100" type="email" name="mail" placeholder="adresse@exemple.com">
+						<input class="input100" type="email" name="mail" placeholder="adresse@exemple.com" value="<?php if (isset($_SESSION['mail'])) {
+																														echo htmlentities($_SESSION['mail']);
+																													} ?>">
 						<span class="focus-input100"></span>
 					</div>
 					<?php
@@ -75,7 +82,9 @@
 
 					<div class="wrap-input100 validate-input">
 						<span class="label-input100">Téléphone</span>
-						<input class="input100" type="tel" name="tel" placeholder="0102030405">
+						<input class="input100" type="tel" name="tel" placeholder="0102030405" value="<?php if (isset($_SESSION['tel'])) {
+																											echo htmlentities($_SESSION['tel']);
+																										} ?>">
 						<span class="focus-input100"></span>
 					</div>
 					<?php
@@ -102,20 +111,43 @@
 					}
 					?>
 
-					<div>
-						<table id="table-container" class="table">
-							<thead class="table-dark">
-							</thead>
-							<tbody>
-								<tr></tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="wrap-input100">
-						<span class="label-input100 validate-input">Message</span>
-						<textarea class="input100" name="message" placeholder="Entrer un commentaire ou des précisions si besoin..."></textarea>
+					<div class="wrap-input100 validate-input">
+						<span class="label-input100">Lieu souhaité de retrait du colis</span>
+						<input class="input100" type="text" name="city" placeholder="Entrez un nom de ville" list="datalistOptions" value="<?php if (isset($_SESSION['city'])) {
+																																				echo htmlentities($_SESSION['city']);
+																																			} ?>">
+						<datalist id="datalistOptions">
+							<option value="Rouffach">
+							<option value="Guebwiller">
+							<option value="Colmar">
+							<option value="Mulhouse">
+						</datalist>
 						<span class="focus-input100"></span>
 					</div>
+
+					<?php
+					if (isset($_GET['5'])) {
+						echo '<div class="alert alert-danger"><strong>' . $_GET['5'] . '</strong></div>';
+					}
+					?>
+
+					<div class="wrap-input100">
+						<span class="label-input100 validate-input">Message</span>
+						<textarea class="input100" name="message" placeholder="Entrer un commentaire ou des précisions si besoin..." maxlength="300"><?php if (isset($_SESSION['message'])) {
+																																							echo htmlentities($_SESSION['message']);
+																																						} ?></textarea>
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="mb-3 form-check">
+						<input type="checkbox" class="form-check-input" name="checkConsentement" value="true">
+						<label class="form-check-label" for="checkConsentement">En cochant cette case, vous consentez à transmettre vos données qui seront utilisées par nos services uniquement dans le cadre du projet de colis alimentaire.</label>
+					</div>
+					<?php
+					if (isset($_GET['6'])) {
+						echo '<div class="alert alert-danger"><strong>' . $_GET['6'] . '</strong></div>';
+					}
+					?>
 
 					<div class="container-contact100-form-btn">
 						<div class="wrap-contact100-form-btn">

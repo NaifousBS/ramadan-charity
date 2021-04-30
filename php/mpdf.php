@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 
  * PHP PDF GENERATOR - MPDF
@@ -22,10 +23,11 @@ if ($packageType == '3') {
 $data = '
 <h1>Reçu - bon de commande de colis alimentaire</h1>
 <strong>Nom:</strong> ' . $name . '<br/>
-<strong>Date:</strong> ' . date('j/m/y') . '<br/>
+<strong>Date:</strong> ' . date('j/m/Y') . '<br/>
 <strong>Mail:</strong> ' . $mail . '<br/>
 <strong>Tél:</strong> ' . $tel . '<br/>
-<strong>Type de colis:</strong> '.$packageType.' - '.$packageName.'
+<strong>Type de colis:</strong> ' . $packageType . ' - ' . $packageName . '<br/>
+<strong>Lieu de retrait:</strong> ' . $city . '
 ';
 
 if ($message) {
@@ -42,14 +44,14 @@ $mpdf->WriteHTML($data);
 // D 'download' 
 $date = date('Y-m-j');
 $formattedName = $name;
-$folder = '../resources/pdf/'.$date;
+$folder = '../resources/pdf/' . $date;
 if (!is_dir($folder)) {
     // Create our directory if it does not exist
     mkdir($folder);
 }
 
-$filename = $date.'-'.formatName($name).'-recu-demande-colis-alimentaire.pdf';
-$downloadLink = $folder.'/'.$filename;
+$filename = $date . '-' . formatName($name) . '-recu-demande-colis-alimentaire.pdf';
+$downloadLink = $folder . '/' . $filename;
 $mpdf->Output($downloadLink, 'F');
 $_SESSION['dl-link'] = str_replace('../', '', $downloadLink);
 //$mpdf->Output($filename, 'D');
