@@ -43,7 +43,7 @@ $mail->CharSet = 'UTF-8';
 
 //Content
 $mail->isHTML(true);                                  //Set email format to HTML
-$mail->Subject = 'Nouvelle demande de colis alimentaire - ' . $name;
+$mail->Subject = 'Nouvelle demande de colis alimentaire - ' . $name . ' ' . $firstname;
 $mail->Body    = $data;
 $mail->AltBody = strip_tags($data);
 

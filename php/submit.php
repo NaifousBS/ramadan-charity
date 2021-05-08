@@ -13,6 +13,7 @@ require_once 'functions.php';
 
 // Get form variables
 $_SESSION['name'] = $name = htmlspecialchars($_POST['name']);
+$_SESSION['firstname'] = $firstname = htmlspecialchars($_POST['firstname']);
 $_SESSION['mail'] = $mail = htmlspecialchars($_POST['mail']);
 $_SESSION['tel'] = $tel = htmlspecialchars($_POST['tel']);
 $_SESSION['message'] = $message = htmlspecialchars($_POST['message']);
@@ -21,6 +22,7 @@ $_SESSION['city'] = $city = htmlspecialchars($_POST['city']);
 $checkConsentement = isset(($_POST['checkConsentement'])) ? htmlspecialchars($_POST['checkConsentement']) : "";
 
 $formValid = $name &&
+    $firstname &&
     ($mail || $tel) &&
     $packageType &&
     $packageType != '--' &&
@@ -30,7 +32,7 @@ $formValid = $name &&
 if ($formValid) {
     try {
         $message = str_replace(",", " ", $message);
-        $arr = array($name, $packageType, $mail, $tel, $city, $message);
+        $arr = array($name, $firstname, $packageType, $mail, $tel, $city, $message);
         addEntryInCsv($arr);
         include_once 'mpdf.php';
         include_once 'mail.php';
@@ -39,7 +41,7 @@ if ($formValid) {
         exit;
     }
 
-    header('Location: ../thanks.php?name=' . $name);
+    header('Location: ../thanks.php?name=' . $firstname);
     $mpdf->Output($filename, 'D');
     exit;
 } else {
@@ -51,6 +53,11 @@ if ($formValid) {
     if (!$name) {
         $error_message = 'Le nom est obligatoire';
         $prefix .= '1=' . $error_message . $and;
+    }
+
+    if (!$firstname) {
+        $error_message = 'Le prénom est obligatoire';
+        $prefix .= '7=' . $error_message . $and;
     }
 
     if (!$mail && !$tel) {

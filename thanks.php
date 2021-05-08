@@ -2,6 +2,7 @@
 <?php
 session_start();
 $_SESSION['name'] = null;
+$_SESSION['firstname'] = null;
 $_SESSION['mail'] = null;
 $_SESSION['tel'] = null;
 $_SESSION['message'] = null;

@@ -23,6 +23,7 @@ if ($packageType == '3') {
 $data = '
 <h1>Reçu - bon de commande de colis alimentaire</h1>
 <strong>Nom:</strong> ' . $name . '<br/>
+<strong>Prénom:</strong> ' . $firstname . '<br/>
 <strong>Date:</strong> ' . date('j/m/Y') . '<br/>
 <strong>Mail:</strong> ' . $mail . '<br/>
 <strong>Tél:</strong> ' . $tel . '<br/>
@@ -50,7 +51,7 @@ if (!is_dir($folder)) {
     mkdir($folder);
 }
 
-$filename = $date . '-' . formatName($name) . '-recu-demande-colis-alimentaire.pdf';
+$filename = $date . '-' . formatName($name) . '-' . formatName($firstname) . '-recu-demande-colis-alimentaire.pdf';
 $downloadLink = $folder . '/' . $filename;
 $mpdf->Output($downloadLink, 'F');
 $_SESSION['dl-link'] = str_replace('../', '', $downloadLink);

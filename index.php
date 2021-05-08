@@ -41,7 +41,7 @@
 					</span>
 
 					<?php
-					if (isset($_GET['1']) || isset($_GET['2']) || isset($_GET['3']) || isset($_GET['4']) || isset($_GET['5']) || isset($_GET['6'])) {
+					if (isset($_GET['1']) || isset($_GET['2']) || isset($_GET['3']) || isset($_GET['4']) || isset($_GET['5']) || isset($_GET['6']) || isset($_GET['7'])) {
 						echo '<div class="alert alert-danger"><strong>Vous devez renseigner certains champs</strong></div>';
 					}
 					?>
@@ -65,6 +65,19 @@
 					<?php
 					if (isset($_GET['1'])) {
 						echo '<div class="alert alert-danger"><strong>' . $_GET['1'] . '</strong></div>';
+					}
+					?>
+
+					<div class="wrap-input100 validate-input">
+						<span class="label-input100">Prénom</span>
+						<input id="firstname" class="input100" type="text" name="firstname" placeholder="Prénom" value="<?php if (isset($_SESSION['firstname'])) {
+																															echo htmlentities($_SESSION['firstname']);
+																														} ?>" />
+						<span class="focus-input100"></span>
+					</div>
+					<?php
+					if (isset($_GET['7'])) {
+						echo '<div class="alert alert-danger"><strong>' . $_GET['7'] . '</strong></div>';
 					}
 					?>
 
