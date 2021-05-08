@@ -18,6 +18,7 @@ $_SESSION['mail'] = $mail = htmlspecialchars($_POST['mail']);
 $_SESSION['tel'] = $tel = htmlspecialchars($_POST['tel']);
 $_SESSION['message'] = $message = htmlspecialchars($_POST['message']);
 $_SESSION['packageType'] = $packageType = htmlspecialchars($_POST['packageType']);
+$_SESSION['packageLocation'] = $packageLocation = htmlspecialchars($_POST['packageLocation']);
 $_SESSION['city'] = $city = htmlspecialchars($_POST['city']);
 $checkConsentement = isset(($_POST['checkConsentement'])) ? htmlspecialchars($_POST['checkConsentement']) : "";
 
@@ -27,13 +28,15 @@ $formValid = $name &&
     $tel &&
     $packageType &&
     $packageType != '--' &&
+    $packageLocation &&
+    $packageLocation != '--' &&
     $city &&
     $checkConsentement;
 
 if ($formValid) {
     try {
         $message = str_replace(",", " ", $message);
-        $arr = array($name, $firstname, $packageType, $mail, $tel, $city, $message);
+        $arr = array($name, $firstname, $packageType, $packageLocation, $mail, $tel, $city, $message);
         addEntryInCsv($arr);
         include_once 'mpdf.php';
         include_once 'mail.php';
@@ -77,13 +80,18 @@ if ($formValid) {
     }
 
     if (!$city) {
-        $error_message = 'Veuillez entrer une ville de retrait';
+        $error_message = 'Veuillez entrer votre ville de résidence';
         $prefix .= '5=' . $error_message . $and;
     }
 
     if (!$checkConsentement) {
         $error_message = 'Vous devez accepter les conditions d\'utilisation';
         $prefix .= '6=' . $error_message . $and;
+    }
+
+    if (!$packageLocation || $packageLocation == '--') {
+        $error_message = 'Choisissez le lieu de retrait de colis dans la liste';
+        $prefix .= '8=' . $error_message . $and;
     }
 
     header('Location: ../' . $prefix);

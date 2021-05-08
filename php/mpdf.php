@@ -24,15 +24,16 @@ $data = '
 <h1>Reçu - bon de commande de colis alimentaire</h1>
 <strong>Nom:</strong> ' . $name . '<br/>
 <strong>Prénom:</strong> ' . $firstname . '<br/>
-<strong>Date:</strong> ' . date('j/m/Y') . '<br/>
+<strong>Date:</strong> ' . date('d/m/Y') . '<br/>
 <strong>Mail:</strong> ' . $mail . '<br/>
 <strong>Tél:</strong> ' . $tel . '<br/>
+<strong>Ville de résidence:</strong> ' . $city . '<br/>
 <strong>Type de colis:</strong> ' . $packageType . ' - ' . $packageName . '<br/>
-<strong>Lieu de retrait:</strong> ' . $city . '
+<strong>Lieu de retrait:</strong> ' . $packageLocation . '<br/>
 ';
 
 if ($message) {
-    $data .= '<br/><strong>Message:</strong> ' . $message . '<br/>';
+    $data .= '<strong>Message:</strong> ' . $message . '<br/>';
 }
 
 $data .= '<br/><br/><i>L\'Association Avicenne de Rouffach</i>';
@@ -44,7 +45,6 @@ $mpdf->WriteHTML($data);
 // F 'file'
 // D 'download' 
 $date = date('Y-m-j');
-$formattedName = $name;
 $folder = '../resources/pdf/' . $date;
 if (!is_dir($folder)) {
     // Create our directory if it does not exist

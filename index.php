@@ -41,7 +41,7 @@
 					</span>
 
 					<?php
-					if (isset($_GET['1']) || isset($_GET['2']) || isset($_GET['3']) || isset($_GET['4']) || isset($_GET['5']) || isset($_GET['6']) || isset($_GET['7'])) {
+					if (isset($_GET['1']) || isset($_GET['2']) || isset($_GET['3']) || isset($_GET['4']) || isset($_GET['5']) || isset($_GET['6']) || isset($_GET['7']) || isset($_GET['8'])) {
 						echo '<div class="alert alert-danger"><strong>Vous devez renseigner certains champs</strong></div>';
 					}
 					?>
@@ -107,6 +107,20 @@
 					}
 					?>
 
+					<div class="wrap-input100 validate-input">
+						<span class="label-input100">Ville de résidence</span>
+						<input class="input100" type="text" name="city" placeholder="Entrez un nom de ville" value="<?php if (isset($_SESSION['city'])) {
+																														echo htmlentities($_SESSION['city']);
+																													} ?>">
+						<span class="focus-input100"></span>
+					</div>
+
+					<?php
+					if (isset($_GET['5'])) {
+						echo '<div class="alert alert-danger"><strong>' . $_GET['5'] . '</strong></div>';
+					}
+					?>
+
 					<div class="wrap-input100 input100-select">
 						<span class="label-input100">Choix du type de colis</span>
 						<div>
@@ -125,23 +139,21 @@
 					}
 					?>
 
-					<div class="wrap-input100 validate-input">
+					<div class="wrap-input100 input100-select">
 						<span class="label-input100">Lieu souhaité de retrait du colis</span>
-						<input class="input100" type="text" name="city" placeholder="Entrez un nom de ville" list="datalistOptions" value="<?php if (isset($_SESSION['city'])) {
-																																				echo htmlentities($_SESSION['city']);
-																																			} ?>">
-						<datalist id="datalistOptions">
-							<option value="Rouffach">
-							<option value="Guebwiller">
-							<option value="Colmar">
-							<option value="Mulhouse">
-						</datalist>
+						<div>
+							<select id="packageLocation" class="selection-2" name="packageLocation">
+								<option>--</option>
+								<option value="Colmar-IUT">Colmar-IUT</option>
+								<option value="Colmar-Gare">Colmar-Gare</option>
+							</select>
+						</div>
 						<span class="focus-input100"></span>
 					</div>
 
 					<?php
-					if (isset($_GET['5'])) {
-						echo '<div class="alert alert-danger"><strong>' . $_GET['5'] . '</strong></div>';
+					if (isset($_GET['8'])) {
+						echo '<div class="alert alert-danger"><strong>' . $_GET['8'] . '</strong></div>';
 					}
 					?>
 
