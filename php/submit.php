@@ -23,7 +23,8 @@ $checkConsentement = isset(($_POST['checkConsentement'])) ? htmlspecialchars($_P
 
 $formValid = $name &&
     $firstname &&
-    ($mail || $tel) &&
+    $mail &&
+    $tel &&
     $packageType &&
     $packageType != '--' &&
     $city &&
@@ -60,11 +61,14 @@ if ($formValid) {
         $prefix .= '7=' . $error_message . $and;
     }
 
-    if (!$mail && !$tel) {
-        $text = $tel ? 'Le numéro de téléphone' : 'L\'adresse email';
-        $error_message = $text . ' est obligatoire';
-        $errorId = $tel ? '4' : '2';
-        $prefix .= $errorId . '=' . $error_message . $and;
+    if (!$mail) {
+        $error_message = 'L\'adresse email est obligatoire';
+        $prefix .= '2=' . $error_message . $and;
+    }
+
+    if (!$tel) {
+        $error_message = 'Le numéro de téléphone est obligatoire';
+        $prefix .= '4=' . $error_message . $and;
     }
 
     if (!$packageType || $packageType == '--') {
