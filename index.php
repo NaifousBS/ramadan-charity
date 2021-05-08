@@ -49,7 +49,6 @@
 					<p>
 						Simple et rapide. Remplissez les champs pour vous inscrire.<br />
 						Après inscription vous recevrez un e-mail pour valider votre inscription, veuillez donc bien indiquer votre e-mail.<br />
-						Important : les inscriptions doivent être envoyées au plus tard le <strong>vendredi à 15h.</strong><br />
 						Les distributions ont lieu le <strong>dimanche</strong> : vous recevrez l'adresse exacte par e-mail.
 					</p>
 					<br />
