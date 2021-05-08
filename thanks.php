@@ -71,6 +71,20 @@ if (!isset($_GET['name'])) {
 			 </a>
 			 </div>
 			 </div>
+
+			 <div class="container-contact100-form-btn">
+			 <div class="wrap-contact100-form-btn">
+			 <div class="contact100-form-bgbtn"></div>
+			 <a href="redirect.php">
+			 <button type="button" class="contact100-form-btn">
+			 <span>
+				 Retour au formulaire
+				 <i class="fa fa-long-arrow-left m-l-7" aria-hidden="true"></i>
+			 </span>
+		 	</button>
+			 </a>
+			 </div>
+			 </div>
 			 ';
 			}
 			?>
